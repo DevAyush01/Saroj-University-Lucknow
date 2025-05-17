@@ -110,7 +110,7 @@ const AcademicHighlights = () => {
             Join India's fastest growing university with world-class infrastructure and industry-aligned curriculum.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="https://seglko.in8.nopaperforms.com/" className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium">
+            <a href="https://siu.in8.nopaperforms.com/" className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium">
               Apply Now
             </a>
             

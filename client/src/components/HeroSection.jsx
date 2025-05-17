@@ -20,7 +20,7 @@ const HeroSection = () => {
           education to shape professionals driven by impact and excellence.
         </p>
         <a
-          href="https://seglko.in8.nopaperforms.com/"
+          href="https://siu.in8.nopaperforms.com/"
           target="_blank"
           rel="noopener noreferrer"
           className="bg-red-600 hover:bg-red-700 px-6 py-2 text-white rounded font-semibold"
