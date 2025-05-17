@@ -241,7 +241,7 @@ const Header = () => {
             <FiPhoneCall className="text-2xl" />
             <div className="text-sm leading-tight">
               <p className="text-gray-200">Admission Helpline</p>
-              <p className="font-bold text-white">1800121</p>
+              <a href="tel:9513731275" className="font-bold text-white">+91 9513731275</a>
             </div>
           </div>
 
