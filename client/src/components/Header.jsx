@@ -33,9 +33,13 @@ const menuItems = [
   {
     title: "Admissions",
     submenu: [
-      { label: "Undergraduate Admissions", path: "/admissions/undergraduate" },
-      { label: "Postgraduate Admissions", path: "/admissions/postgraduate" },
-      { label: "Scholarships", path: "/admissions/scholarships" },
+      { label: "Admission procedure", path: "/admissions/undergraduate" },
+      { label: "Eligibility criteria", path: "/admissions/postgraduate" },
+      {
+        label: "Fee Structure",
+        path: "/pdfs/SIU-Fee-Structure.pdf#toolbar=0",
+        isExternal: true,
+      },
     ],
   },
   {
@@ -97,17 +101,25 @@ const Header = () => {
 
   return (
     <motion.header
-      animate={{ backgroundColor: scrolled ? "rgba(30, 64, 175, 0.9)" : "rgba(0, 0, 0, 0)" }}
+      animate={{
+        backgroundColor: scrolled
+          ? "rgba(30, 64, 175, 1)"
+          : "rgba(0, 0, 0, 0)",
+      }}
       transition={{ duration: 0.3 }}
       className="fixed top-0 w-full bg-transparent text-white z-50"
     >
       <div className="max-w-8xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo and Title (unchanged) */}
         <div className="flex items-center gap-2">
-          <img src={logo || "/placeholder.svg"} alt="SIU Logo" className="h-20 w-36" />
+          <img
+            src={logo || "/placeholder.svg"}
+            alt="SIU Logo"
+            className="h-20 w-36"
+          />
           <div className="hidden md:flex flex-col">
             <h1 className="text-xl font-bold leading-tight">
-              Saroj
+              Saroj International
               <br />
               UNIVERSITY
             </h1>
@@ -142,36 +154,47 @@ const Header = () => {
                     <div className="p-6">
                       {/* Header with title and description */}
                       <div className="mb-6">
-                        <h3 className="text-2xl font-bold text-blue-800 mb-2">{title}</h3>
-                        <p className="text-gray-600 text-sm">
-                          Explore our {title.toLowerCase()} offerings and opportunities
-                        </p>
+                        <h3 className="text-2xl font-bold text-blue-800 mb-2">
+                          {title}
+                        </h3>
+                       
                       </div>
 
                       {/* Two-column layout */}
                       <div className="grid grid-cols-2 gap-6">
                         {/* Left column - Quick Links */}
                         <div>
-                          <h4 className="font-semibold text-blue-700 mb-3 pb-2 border-b border-gray-200">
+                          {/* <h4 className="font-semibold text-blue-700 mb-3 pb-2 border-b border-gray-200">
                             Quick Links
-                          </h4>
+                          </h4> */}
                           <ul className="space-y-2">
-                            {submenu.map(({ label, path }) => (
+                            {submenu.map(({ label, path, isExternal }) => (
                               <li key={label}>
-                                <Link
-                                  to={path}
-                                  onClick={handleSubmenuClick}
-                                  className="block py-1 hover:text-blue-600 transition-colors"
-                                >
-                                  {label}
-                                </Link>
+                                {isExternal ? (
+                                  <a
+                                    href={path}
+                                    target="_blank"
+                                    rel="_noreferrer noopener"
+                                    className="block py-1 hover:text-blue-600 transition-colors"
+                                  >
+                                    {label}
+                                  </a>
+                                ) : (
+                                  <Link
+                                    to={path}
+                                    onClick={handleSubmenuClick}
+                                    className="block py-1 hover:text-blue-600 transition-colors"
+                                  >
+                                    {label}
+                                  </Link>
+                                )}
                               </li>
                             ))}
                           </ul>
                         </div>
 
                         {/* Right column - Highlights */}
-                        <div className="bg-blue-50 p-4 rounded-lg">
+                        {/* <div className="bg-blue-50 p-4 rounded-lg">
                           <h4 className="font-semibold text-blue-700 mb-3 pb-2 border-b border-gray-200">
                             Key Highlights
                           </h4>
@@ -192,18 +215,18 @@ const Header = () => {
                               </li>
                             )}
                           </ul>
-                        </div>
+                        </div> */}
                       </div>
 
                       {/* Call to action at bottom */}
-                      <div className="mt-6 pt-4 border-t border-gray-200">
+                      {/* <div className="mt-6 pt-4 border-t border-gray-200">
                         <Link
                           to={`/${title.toLowerCase().replace(/\s+/g, "-")}`}
                           className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
                         >
                           View All {title}
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
                   </motion.div>
                 )}
@@ -211,7 +234,7 @@ const Header = () => {
             </div>
           ))}
         </nav>
-        
+
         {/* Right: Helpline and Mobile Menu Button */}
         <div className="flex items-center gap-4">
           <div className="hidden md:flex items-center gap-2 bg-blue-700 px-4 py-2 rounded-lg">
@@ -221,7 +244,7 @@ const Header = () => {
               <p className="font-bold text-white">1800121</p>
             </div>
           </div>
-          
+
           <button
             className="xl:hidden text-2xl focus:outline-none"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -246,20 +269,27 @@ const Header = () => {
             <div className="h-[calc(100vh-86px)] overflow-y-auto pb-20">
               <nav className="xl:hidden px-4 py-4 space-y-4">
                 {menuItems.map(({ title, submenu }) => (
-                  <div key={title} className="mb-4 border-b border-blue-800 pb-2">
+                  <div
+                    key={title}
+                    className="mb-4 border-b border-blue-800 pb-2"
+                  >
                     <button
                       className="flex items-center justify-between w-full text-left py-3 font-medium text-white"
-                      onClick={() => setOpenDropdown(openDropdown === title ? null : title)}
+                      onClick={() =>
+                        setOpenDropdown(openDropdown === title ? null : title)
+                      }
                     >
                       <span className="text-lg">{title}</span>
-                      <span className="text-xl">{openDropdown === title ? '−' : '+'}</span>
+                      <span className="text-xl">
+                        {openDropdown === title ? "−" : "+"}
+                      </span>
                     </button>
-                    
+
                     <AnimatePresence>
                       {openDropdown === title && (
                         <motion.div
                           initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
+                          animate={{ opacity: 1, height: "auto" }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.2 }}
                           className="pl-4 space-y-3 mt-2 mb-4"
@@ -286,7 +316,7 @@ const Header = () => {
                     </AnimatePresence>
                   </div>
                 ))}
-                
+
                 <div className="flex items-center gap-2 bg-blue-700 px-4 py-3 rounded-lg mt-6">
                   <FiPhoneCall className="text-2xl" />
                   <div className="text-sm leading-tight">

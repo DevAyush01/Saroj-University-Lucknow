@@ -71,7 +71,6 @@ const AcademicHighlights = () => {
                   </div>
                 </div>
                 <p className="text-gray-700 italic mb-4">"{student.quote}"</p>
-                <a href="#" className="text-indigo-600 text-sm font-medium">Read full story →</a>
               </div>
             ))}
           </div>
@@ -88,7 +87,7 @@ const AcademicHighlights = () => {
             </div>
             <div>
               <FaGraduationCap className="text-5xl mx-auto mb-4 text-indigo-300" />
-              <p className="text-4xl font-bold mb-2">15K+</p>
+              <p className="text-4xl font-bold mb-2">34K+</p>
               <p className="text-indigo-200">Alumni Network</p>
             </div>
             <div>
@@ -106,17 +105,15 @@ const AcademicHighlights = () => {
 
         {/* Call to Action */}
         <div className="text-center">
-          <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to be part of Saroj University?</h3>
+          <h3 className="text-2xl font-bold text-gray-800 mb-4">Ready to be part of Saroj International University?</h3>
           <p className="text-xl text-gray-600 mb-6 max-w-3xl mx-auto">
             Join India's fastest growing university with world-class infrastructure and industry-aligned curriculum.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            <a href="#" className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium">
+            <a href="https://seglko.in8.nopaperforms.com/" className="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium">
               Apply Now
             </a>
-            <a href="#" className="bg-white hover:bg-gray-100 text-indigo-600 border border-indigo-600 px-8 py-3 rounded-lg font-medium">
-              Schedule Campus Visit
-            </a>
+            
           </div>
         </div>
       </div>

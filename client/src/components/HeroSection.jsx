@@ -16,11 +16,17 @@ const HeroSection = () => {
           Welcome to Saroj International University
         </h2>
         <p className="text-lg md:text-xl mb-6 max-w-2xl leading-relaxed">
-          Saroj University integrates innovative research and inclusive education to shape professionals driven by impact and excellence.
+          Saroj University integrates innovative research and inclusive
+          education to shape professionals driven by impact and excellence.
         </p>
-        <button className="bg-red-600 hover:bg-red-700 px-6 py-2 text-white rounded font-semibold">
-          Apply Today
-        </button>
+        <a
+          href="https://seglko.in8.nopaperforms.com/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-red-600 hover:bg-red-700 px-6 py-2 text-white rounded font-semibold"
+        >
+          Apply Now
+        </a>
       </div>
     </section>
   );

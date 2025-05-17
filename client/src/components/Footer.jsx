@@ -56,11 +56,11 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <FaPhone className="mr-3 text-blue-400" />
-                <span>+91 522 1234567</span>
+                <a href='tel:9513731275'>+91 9513731275</a>
               </li>
               <li className="flex items-center">
                 <FaEnvelope className="mr-3 text-blue-400" />
-                <span>admission@sarojuniversity.edu.in</span>
+                <a href='mailto:admission@sarojuniversity.edu.in'>admission@sarojuniversity.edu.in</a>
               </li>
             </ul>
           </div>
@@ -71,7 +71,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="border-t border-gray-800 mt-8 pt-6 text-center text-gray-400">
           <p>
-            &copy; {new Date().getFullYear()} Saroj University, Lucknow. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Saroj International University, Lucknow. All Rights Reserved.
           </p>
           <div className="flex justify-center space-x-4 mt-2">
             <a href="#" className="hover:text-blue-400 transition">Privacy Policy</a>
