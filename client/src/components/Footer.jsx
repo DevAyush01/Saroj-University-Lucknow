@@ -1,4 +1,5 @@
 import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
@@ -39,10 +40,10 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">Home</a></li>
               <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">About Us</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">Academics</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">Admissions</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">Research</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">Campus Life</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">Programs</a></li>
+              <li><Link to="/admissions/procedure" className="text-gray-300 hover:text-blue-400 transition">Admissions</Link></li>
+              {/* <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">Research</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-blue-400 transition">Campus Life</a></li> */}
             </ul>
           </div>
 
@@ -74,8 +75,8 @@ const Footer = () => {
             &copy; {new Date().getFullYear()} Saroj International University, Lucknow. All Rights Reserved.
           </p>
           <div className="flex justify-center space-x-4 mt-2">
-            <a href="#" className="hover:text-blue-400 transition">Privacy Policy</a>
-            <a href="#" className="hover:text-blue-400 transition">Terms of Service</a>
+            <Link to="/privacy-policy" className="hover:text-blue-400 transition">Privacy Policy</Link>
+            <Link to="/terms-conditions" className="hover:text-blue-400 transition">Terms of Service</Link>
           </div>
         </div>
       </div>

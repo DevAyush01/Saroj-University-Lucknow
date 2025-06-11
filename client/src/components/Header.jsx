@@ -8,33 +8,20 @@ const menuItems = [
   {
     title: "About",
     submenu: [
+      { label: "About SIU", path: "/about/about-siu" },
       { label: "Vision & Mission", path: "/about/vision-mission" },
       { label: "Leadership", path: "/about/leadership" },
-      { label: "Accreditation", path: "/about/accreditation" },
     ],
   },
   {
     title: "Programs",
-    submenu: [
-      { label: "Undergraduate", path: "/programs/undergraduate" },
-      { label: "Postgraduate", path: "/programs/postgraduate" },
-      { label: "Doctoral", path: "/programs/doctoral" },
-      { label: "Diploma & Certificate", path: "/programs/diploma-certificate" },
-    ],
+    submenu: [{ label: "Courses Offered", path: "/programs/courses-offered" }],
   },
-  {
-    title: "Academics",
-    submenu: [
-      { label: "Departments", path: "/academics/departments" },
-      { label: "Faculty", path: "/academics/faculty" },
-      { label: "Labs & Library", path: "/academics/labs-library" },
-    ],
-  },
+
   {
     title: "Admissions",
     submenu: [
-      { label: "Admission procedure", path: "/admissions/undergraduate" },
-      { label: "Eligibility criteria", path: "/admissions/postgraduate" },
+      { label: "Admission procedure", path: "/admissions/procedure" },
       {
         label: "Fee Structure",
         path: "/pdfs/SIU-Fee-Structure.pdf#toolbar=0",
@@ -42,26 +29,21 @@ const menuItems = [
       },
     ],
   },
-  {
-    title: "Campus Life",
-    submenu: [
-      { label: "Hostel", path: "/campus-life/hostel" },
-      { label: "Sports", path: "/campus-life/sports" },
-      { label: "Events", path: "/campus-life/events" },
-    ],
-  },
+  // {
+  //   title: "Campus Life",
+  //   submenu: [
+  //     { label: "Hostel", path: "/campus-life/hostel" },
+  //     { label: "Sports", path: "/campus-life/sports" },
+  //     { label: "Events", path: "/campus-life/events" },
+  //   ],
+  // },
   {
     title: "Placements",
-    submenu: [
-      { label: "Placement Cell", path: "/placements/cell" },
-      { label: "Recruiters", path: "/placements/recruiters" },
-      { label: "Alumni", path: "/placements/alumni" },
-    ],
+    path: "/placement",
   },
   {
     title: "Research & Innovation",
     submenu: [
-      { label: "Research Centers", path: "/research/centers" },
       { label: "Projects", path: "/research/projects" },
       { label: "Publications", path: "/research/publications" },
     ],
@@ -102,9 +84,7 @@ const Header = () => {
   return (
     <motion.header
       animate={{
-        backgroundColor: scrolled
-          ? "rgba(30, 64, 175, 1)"
-          : "rgba(0, 0, 0, 0)",
+        backgroundColor: scrolled ? "rgba(30, 64, 175, 1)" : "rgba(0, 0, 0, 0)",
       }}
       transition={{ duration: 0.3 }}
       className="fixed top-0 w-full bg-transparent text-white z-50"
@@ -112,11 +92,13 @@ const Header = () => {
       <div className="max-w-8xl mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo and Title (unchanged) */}
         <div className="flex items-center gap-2">
+          <Link to='/'>
           <img
             src={logo || "/placeholder.svg"}
             alt="SIU Logo"
             className="h-20 w-36"
           />
+          </Link>
           <div className="hidden md:flex flex-col">
             <h1 className="text-xl font-bold leading-tight">
               Saroj International
@@ -131,19 +113,43 @@ const Header = () => {
 
         {/* Desktop Navigation */}
         <nav className="hidden xl:flex gap-6 font-medium text-white">
-          {menuItems.map(({ title, submenu, highlights }) => (
+          {menuItems.map(({ title, path, submenu }) => (
             <div
               key={title}
               className="relative"
-              onMouseEnter={() => handleMouseEnter(title)}
-              onMouseLeave={handleMouseLeave}
+              onMouseEnter={() => submenu && handleMouseEnter(title)}
+              onMouseLeave={submenu ? handleMouseLeave : undefined}
             >
-              <button className="hover:text-blue-300 px-2 py-1 transition-colors">
-                {title}
-              </button>
+              {/* If no submenu, render Link or anchor directly */}
+              {!submenu ? (
+                path.startsWith("http") || path.includes("pdf") ? (
+                  <a
+                  href={path}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center hover:text-blue-300 px-2 py-1 transition-colors"
+                >
+                
+                    {title}
+                  </a>
+                ) : (
+                  <Link
+                    to={path}
+                    className="inline-flex items-center hover:text-blue-300 px-2 py-1 transition-colors">
+                    {title}
+                  </Link>
+                )
+              ) : (
+                // Button for items with submenu
+                <button className="inline-flex items-center hover:text-blue-300 px-2 py-1 transition-colors">
 
+                  {title}
+                </button>
+              )}
+
+              {/* Dropdown for submenu */}
               <AnimatePresence>
-                {openDropdown === title && (
+                {submenu && openDropdown === title && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -152,21 +158,16 @@ const Header = () => {
                     className="absolute left-0 w-96 bg-white text-gray-800 shadow-xl mt-1 z-50 rounded-lg overflow-hidden"
                   >
                     <div className="p-6">
-                      {/* Header with title and description */}
+                      {/* Dropdown Title */}
                       <div className="mb-6">
                         <h3 className="text-2xl font-bold text-blue-800 mb-2">
                           {title}
                         </h3>
-                       
                       </div>
 
-                      {/* Two-column layout */}
+                      {/* Submenu Links */}
                       <div className="grid grid-cols-2 gap-6">
-                        {/* Left column - Quick Links */}
                         <div>
-                          {/* <h4 className="font-semibold text-blue-700 mb-3 pb-2 border-b border-gray-200">
-                            Quick Links
-                          </h4> */}
                           <ul className="space-y-2">
                             {submenu.map(({ label, path, isExternal }) => (
                               <li key={label}>
@@ -174,7 +175,7 @@ const Header = () => {
                                   <a
                                     href={path}
                                     target="_blank"
-                                    rel="_noreferrer noopener"
+                                    rel="noopener noreferrer"
                                     className="block py-1 hover:text-blue-600 transition-colors"
                                   >
                                     {label}
@@ -192,41 +193,7 @@ const Header = () => {
                             ))}
                           </ul>
                         </div>
-
-                        {/* Right column - Highlights */}
-                        {/* <div className="bg-blue-50 p-4 rounded-lg">
-                          <h4 className="font-semibold text-blue-700 mb-3 pb-2 border-b border-gray-200">
-                            Key Highlights
-                          </h4>
-                          <ul className="space-y-3">
-                            {highlights?.map((item, index) => (
-                              <li key={index} className="flex items-start">
-                                {item.value && (
-                                  <span className="bg-blue-100 text-blue-800 font-bold px-2 py-1 rounded mr-3 text-sm">
-                                    {item.value}
-                                  </span>
-                                )}
-                                <span className="text-gray-700 text-sm">{item.label || "Feature"}</span>
-                              </li>
-                            ))}
-                            {!highlights && (
-                              <li className="text-gray-700 text-sm">
-                                Discover our comprehensive {title.toLowerCase()} options
-                              </li>
-                            )}
-                          </ul>
-                        </div> */}
                       </div>
-
-                      {/* Call to action at bottom */}
-                      {/* <div className="mt-6 pt-4 border-t border-gray-200">
-                        <Link
-                          to={`/${title.toLowerCase().replace(/\s+/g, "-")}`}
-                          className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-colors"
-                        >
-                          View All {title}
-                        </Link>
-                      </div> */}
                     </div>
                   </motion.div>
                 )}
@@ -241,7 +208,9 @@ const Header = () => {
             <FiPhoneCall className="text-2xl" />
             <div className="text-sm leading-tight">
               <p className="text-gray-200">Admission Helpline</p>
-              <a href="tel:9513731275" className="font-bold text-white">+91 9513731275</a>
+              <a href="tel:9513731275" className="font-bold text-white">
+                +91 9513731275
+              </a>
             </div>
           </div>
 
@@ -321,7 +290,9 @@ const Header = () => {
                   <FiPhoneCall className="text-2xl" />
                   <div className="text-sm leading-tight">
                     <p className="text-gray-200">Admission Helpline</p>
-                    <a href="tel:9513731275" className="font-bold text-white">+91 9513731275</a>
+                    <a href="tel:9513731275" className="font-bold text-white">
+                      +91 9513731275
+                    </a>
                   </div>
                 </div>
               </nav>
